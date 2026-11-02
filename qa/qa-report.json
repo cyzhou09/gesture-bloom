@@ -1,6 +1,6 @@
 {
-  "startedAt": "2026-11-02T08:05:53.983Z",
-  "baseUrl": "http://127.0.0.1:50710",
+  "startedAt": "2026-11-02T08:09:49.153Z",
+  "baseUrl": "https://cyzhou09.github.io/gesture-bloom",
   "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
   "checks": [
     {
@@ -21,7 +21,7 @@
     {
       "name": "Demo closes into a bud",
       "ok": true,
-      "detail": "bloom=0.33, gesture=fist"
+      "detail": "bloom=0.28, gesture=fist"
     },
     {
       "name": "Demo drives flower bloom",
@@ -31,7 +31,7 @@
     {
       "name": "HUD visible / intro hidden in demo",
       "ok": true,
-      "detail": "{\"mode\":\"demo\",\"live\":true,\"bloom\":0.9999937794275539,\"hand\":\"open\",\"introHidden\":true,\"hudVisible\":true}"
+      "detail": "{\"mode\":\"demo\",\"live\":true,\"bloom\":0.999997007097252,\"hand\":\"open\",\"introHidden\":true,\"hudVisible\":true}"
     },
     {
       "name": "Help dialog opens accessibly",
@@ -61,7 +61,7 @@
     {
       "name": "Mobile layout fits viewport",
       "ok": true,
-      "detail": "{\"width\":390,\"scrollWidth\":390,\"bloom\":0.9982940661510841,\"cameraPanel\":\"none\"}"
+      "detail": "{\"width\":390,\"scrollWidth\":390,\"bloom\":0.9994707790783107,\"cameraPanel\":\"none\"}"
     },
     {
       "name": "Camera stream + MediaPipe model initialize",
@@ -118,5 +118,5 @@
     "badgeDataMode": "live",
     "badgeColor": "rgb(143, 217, 196)"
   },
-  "finishedAt": "2026-11-02T08:06:28.000Z"
+  "finishedAt": "2026-11-02T08:10:28.681Z"
 }
