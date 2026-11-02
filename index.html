@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>指尖花 · 凌晨花园 — bloom at your fingertips</title>
+  <meta name="description" content="凌晨花园 · 指尖花：一株由光点构成的花，在午夜温室里随手掌手势开合。本地摄像头，本地渲染。" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#06110f" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071211'/%3E%3Cg transform='translate(32 32)' fill='none' stroke='%23d99a84' stroke-width='2.2' stroke-linecap='round'%3E%3Cellipse cx='0' cy='-11' rx='4.4' ry='9'/%3E%3Cellipse cx='0' cy='-11' rx='4.4' ry='9' transform='rotate(72)'/%3E%3Cellipse cx='0' cy='-11' rx='4.4' ry='9' transform='rotate(144)'/%3E%3Cellipse cx='0' cy='-11' rx='4.4' ry='9' transform='rotate(216)'/%3E%3Cellipse cx='0' cy='-11' rx='4.4' ry='9' transform='rotate(288)'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='4.2' fill='%23e9cf9c'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <!-- WebGL scene: full viewport, behind every overlay -->
+    <canvas id="scene" aria-hidden="true"></canvas>
+
+    <!-- Atmosphere: aurora gradients + vignette, painted above the canvas -->
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- Top chrome -->
+    <header id="header">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.1" focusable="false">
+            <g transform="translate(16 15.5)">
+              <ellipse cx="0" cy="-6" rx="2.4" ry="5" />
+              <ellipse cx="0" cy="-6" rx="2.4" ry="5" transform="rotate(72)" />
+              <ellipse cx="0" cy="-6" rx="2.4" ry="5" transform="rotate(144)" />
+              <ellipse cx="0" cy="-6" rx="2.4" ry="5" transform="rotate(216)" />
+              <ellipse cx="0" cy="-6" rx="2.4" ry="5" transform="rotate(288)" />
+            </g>
+            <circle cx="16" cy="15.5" r="1.6" fill="currentColor" stroke="none" />
+          </svg>
+        </span>
+        <span class="brand__name">指尖花</span>
+        <span class="brand__sep" aria-hidden="true"></span>
+        <span class="brand__sub">凌晨花园</span>
+      </div>
+
+      <div class="header__right">
+        <span id="mode-badge" class="mode-badge" data-mode="demo">DEMO</span>
+        <div id="status-pill" class="status-pill" data-state="idle">
+          <span class="status-pill__dot" aria-hidden="true"></span>
+          <span id="status-text">待唤醒</span>
+        </div>
+        <button
+          type="button"
+          id="help-button"
+          class="icon-btn"
+          aria-label="打开手势帮助"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="help-panel"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="8.4" />
+            <path d="M9.6 9.5a2.5 2.5 0 1 1 3.3 2.4c-.7.3-1 .9-1 1.6v.3" />
+            <circle cx="11.9" cy="16.6" r="0.9" fill="currentColor" stroke="none" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Live HUD (revealed by body.is-live) -->
+    <main id="hud" aria-label="实时手势控制台">
+      <section id="tracker-panel" class="panel tracker" aria-label="摄像头与手部追踪">
+        <div class="tracker__head">
+          <span class="tracker__title">
+            <span class="live-dot" aria-hidden="true"></span>
+            手部追踪
+          </span>
+          <button
+            type="button"
+            id="tracker-toggle"
+            class="icon-btn icon-btn--sm"
+            aria-label="收起摄像头预览"
+            aria-expanded="true"
+            aria-controls="tracker-body"
+          >
+            <span class="tracker__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                <path d="M6.5 9.5 12 15l5.5-5.5" />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <div id="tracker-body" class="tracker__body">
+          <div class="tracker__stage">
+            <video id="camera-video" muted playsinline autoplay aria-label="摄像头预览（镜像画面）"></video>
+            <canvas id="landmark-canvas" aria-hidden="true"></canvas>
+            <span class="tracker__frame" aria-hidden="true"></span>
+          </div>
+          <p id="tracker-state">等待手部进入画面</p>
+        </div>
+      </section>
+
+      <section id="gesture-card" class="panel gesture" aria-label="当前手势与绽放程度">
+        <p class="eyebrow gesture__eyebrow">GESTURE <span aria-hidden="true">·</span> 手势</p>
+        <p id="gesture-name">花苞</p>
+        <p id="gesture-desc">握拳时，花瓣向内收拢，像是在等待。</p>
+        <div class="bloom" aria-hidden="true">
+          <div class="bloom__head">
+            <span>绽放程度 BLOOM</span>
+            <span id="bloom-value">0%</span>
+          </div>
+          <div class="bloom__track">
+            <div id="bloom-fill"></div>
+          </div>
+        </div>
+      </section>
+
+      <button type="button" id="hide-ui" class="icon-btn icon-btn--edge" aria-label="隐藏界面">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M3.2 3.2 20.8 20.8" />
+          <path d="M10.6 6.3A8.9 8.9 0 0 1 12 6.2c5 0 9 5.8 9 5.8a16 16 0 0 1-2.3 2.8" />
+          <path d="M6.7 7.9C4 9.7 3 12 3 12s4 5.8 9 5.8c1.6 0 3-.5 4.2-1.2" />
+          <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+        </svg>
+      </button>
+    </main>
+
+    <!-- Intro overlay -->
+    <section id="intro" data-state="idle" aria-labelledby="intro-title">
+      <div class="intro__inner">
+        <p class="eyebrow intro__brand">
+          <span class="intro__brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" focusable="false">
+              <g transform="translate(16 15.5)">
+                <ellipse cx="0" cy="-6" rx="2.4" ry="5" />
+                <ellipse cx="0" cy="-6" rx="2.4" ry="5" transform="rotate(72)" />
+                <ellipse cx="0" cy="-6" rx="2.4" ry="5" transform="rotate(144)" />
+                <ellipse cx="0" cy="-6" rx="2.4" ry="5" transform="rotate(216)" />
+                <ellipse cx="0" cy="-6" rx="2.4" ry="5" transform="rotate(288)" />
+              </g>
+              <circle cx="16" cy="15.5" r="1.6" fill="currentColor" stroke="none" />
+            </svg>
+          </span>
+          <span>凌晨花园</span>
+          <span class="intro__brand-sep" aria-hidden="true">/</span>
+          <span class="intro__brand-en">MIDNIGHT GARDEN</span>
+        </p>
+
+        <h1 id="intro-title" class="intro__title">
+          <span class="intro__title-cn">指尖<span class="intro__title-accent">花</span></span>
+          <span class="intro__title-en">bloom at your fingertips</span>
+        </h1>
+
+        <p id="intro-subtitle">
+          一株由光点构成的花，在午夜的温室里独自呼吸。<br />
+          抬起手，让它随你的指尖舒展、收拢、盛放。
+        </p>
+
+        <div class="intro__actions">
+          <button type="button" id="enter-camera" class="btn btn--primary">
+            <span class="btn__spinner" aria-hidden="true"></span>
+            <svg class="btn__icon btn__icon--camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M4.2 8.6h2.1l1.3-2.1h6.8l1.3 2.1h2.1a1.6 1.6 0 0 1 1.6 1.6v7.2a1.6 1.6 0 0 1-1.6 1.6H4.2a1.6 1.6 0 0 1-1.6-1.6v-7.2a1.6 1.6 0 0 1 1.6-1.6Z" />
+              <circle cx="12" cy="13.6" r="3.1" />
+            </svg>
+            <span>开启摄像头 · 让花绽放</span>
+          </button>
+
+          <button type="button" id="enter-demo" class="btn btn--ghost">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M11 3.2c.5 4.1 2.2 5.8 6.3 6.3-4.1.5-5.8 2.2-6.3 6.3-.5-4.1-2.2-5.8-6.3-6.3 4.1-.5 5.8-2.2 6.3-6.3Z" />
+              <path d="M18.2 14.6c.2 1.9 1.1 2.8 3 3-1.9.2-2.8 1.1-3 3-.2-1.9-1.1-2.8-3-3 1.9-.2 2.8-1.1 3-3Z" />
+            </svg>
+            <span>无摄像头 · 进入演示</span>
+          </button>
+        </div>
+
+        <div class="intro__progress" aria-hidden="true">
+          <div id="intro-progress"></div>
+        </div>
+
+        <p id="intro-status" aria-live="polite">尚未唤醒 · 花朵正在独自呼吸</p>
+
+        <p class="intro__hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M8 12.5V7a1.5 1.5 0 0 1 3 0v5" />
+            <path d="M11 12V5.5a1.5 1.5 0 0 1 3 0V12" />
+            <path d="M14 12V7a1.5 1.5 0 0 1 3 0v5" />
+            <path d="M17 12v-3a1.5 1.5 0 0 1 3 0v6.5c0 3.6-2.6 6.5-6.5 6.5h-1c-2.4 0-4-1-5.2-2.8L4.5 14a1.6 1.6 0 0 1 2.6-1.8L8 13.5" />
+          </svg>
+          <span>光线充足时手势更清晰 · 手距镜头约 40–80 cm</span>
+        </p>
+
+        <p class="intro__note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="5" y="10.5" width="14" height="9.5" rx="2" />
+            <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" />
+            <circle cx="12" cy="15" r="1.1" fill="currentColor" stroke="none" />
+          </svg>
+          <span id="intro-note">摄像头画面仅在本机处理，不会上传、不会保存。随时可以关闭。</span>
+        </p>
+
+        <noscript>
+          <p class="intro__noscript">需要启用 JavaScript，花朵才能在指尖绽放。</p>
+        </noscript>
+      </div>
+    </section>
+
+    <!-- Help / gesture guide -->
+    <div id="help-panel" role="dialog" aria-modal="true" aria-labelledby="help-title">
+      <div class="help__backdrop" aria-hidden="true"></div>
+      <div class="help__dialog panel">
+        <div class="help__head">
+          <p class="eyebrow">GUIDE <span aria-hidden="true">·</span> 手势指南</p>
+          <h2 id="help-title">让花听懂你的手</h2>
+          <button type="button" id="help-close" class="icon-btn help__close" aria-label="关闭帮助">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <path d="M6.5 6.5l11 11M17.5 6.5l-11 11" />
+            </svg>
+          </button>
+        </div>
+
+        <p class="help__lead">三种手势，决定这朵花的呼吸。</p>
+
+        <div class="help__gestures">
+          <article class="help__gesture">
+            <div class="help__diagram" aria-hidden="true">
+              <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                <path d="M40 14c7.4 9.4 11 17.4 11 25.4C51 48.6 46.4 55.4 40 59c-6.4-3.6-11-10.4-11-19.6C29 31.4 32.6 23.4 40 14Z" />
+                <path d="M40 30v17" opacity=".45" />
+                <path d="M40 59v9" opacity=".5" />
+              </svg>
+            </div>
+            <div class="help__copy">
+              <h3>握拳</h3>
+              <p>花瓣向内收拢，缩成一枚安静的花苞。</p>
+            </div>
+          </article>
+
+          <article class="help__gesture">
+            <div class="help__diagram" aria-hidden="true">
+              <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                <g transform="translate(40 39)">
+                  <ellipse cx="0" cy="-15" rx="6" ry="13" opacity=".9" />
+                  <ellipse cx="0" cy="-15" rx="6" ry="13" transform="rotate(60)" opacity=".75" />
+                  <ellipse cx="0" cy="-15" rx="6" ry="13" transform="rotate(120)" opacity=".75" />
+                  <ellipse cx="0" cy="-15" rx="6" ry="13" transform="rotate(180)" opacity=".9" />
+                  <ellipse cx="0" cy="-15" rx="6" ry="13" transform="rotate(240)" opacity=".75" />
+                  <ellipse cx="0" cy="-15" rx="6" ry="13" transform="rotate(300)" opacity=".75" />
+                  <circle cx="0" cy="0" r="5" fill="currentColor" stroke="none" opacity=".9" />
+                </g>
+              </svg>
+            </div>
+            <div class="help__copy">
+              <h3>张开手掌</h3>
+              <p>花朵层层舒展，金色的花蕊亮起来。</p>
+            </div>
+          </article>
+
+          <article class="help__gesture">
+            <div class="help__diagram" aria-hidden="true">
+              <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                <g transform="translate(36 45)">
+                  <ellipse cx="0" cy="-15" rx="6" ry="13" transform="rotate(-24 0 10)" opacity=".85" />
+                  <ellipse cx="0" cy="-15" rx="6" ry="13" transform="rotate(28 0 10)" opacity=".6" />
+                  <ellipse cx="0" cy="-15" rx="6" ry="13" transform="rotate(92 0 10)" opacity=".45" />
+                </g>
+                <circle cx="58" cy="25" r="4" fill="currentColor" stroke="none" />
+                <path d="M45 33c3-4 7-6 9-8" stroke-dasharray="1 3" opacity=".8" />
+              </svg>
+            </div>
+            <div class="help__copy">
+              <h3>指尖靠近</h3>
+              <p>靠近指尖的花瓣微微倾斜，光点随之流动。</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="help__keys">
+          <h3>快捷键</h3>
+          <div class="help__key-row"><span>打开 / 关闭帮助</span><kbd>H</kbd></div>
+          <div class="help__key-row"><span>隐藏 / 显示界面</span><kbd>U</kbd></div>
+          <div class="help__key-row"><span>进入演示模式</span><kbd>D</kbd></div>
+          <div class="help__key-row"><span>收起 / 展开摄像头预览</span><kbd>T</kbd></div>
+          <div class="help__key-row"><span>关闭面板 / 恢复界面</span><kbd>Esc</kbd></div>
+        </div>
+
+        <p class="help__foot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="5" y="10.5" width="14" height="9.5" rx="2" />
+            <path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" />
+          </svg>
+          <span>所有画面都在你的设备上处理，不会离开浏览器。</span>
+        </p>
+      </div>
+    </div>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <button type="button" id="show-ui" class="icon-btn show-ui" aria-label="显示界面">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M2.8 12S6.8 6.2 12 6.2 21.2 12 21.2 12 17.2 17.8 12 17.8 2.8 12 2.8 12Z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    </button>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

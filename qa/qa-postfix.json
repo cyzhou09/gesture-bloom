@@ -1,0 +1,130 @@
+{
+  "startedAt": "2026-11-02T07:32:11.581Z",
+  "checks": [
+    {
+      "name": "Demo starts from a real click on a focused intro CTA",
+      "ok": true,
+      "detail": "{\"mode\":\"demo\",\"live\":true,\"activeIsInIntro\":false,\"activeId\":\"BODY\",\"introAriaHidden\":\"true\",\"introInert\":true,\"badgeText\":\"DEMO\",\"badgeDataMode\":\"demo\",\"badgeColor\":\"rgb(233, 207, 156)\"}"
+    },
+    {
+      "name": "Intro CTA focus is blurred before aria-hidden/inert",
+      "ok": true,
+      "detail": "{\"mode\":\"demo\",\"live\":true,\"activeIsInIntro\":false,\"activeId\":\"BODY\",\"introAriaHidden\":\"true\",\"introInert\":true,\"badgeText\":\"DEMO\",\"badgeDataMode\":\"demo\",\"badgeColor\":\"rgb(233, 207, 156)\"}"
+    },
+    {
+      "name": "DEMO badge uses data-mode=demo + gold styling",
+      "ok": true,
+      "detail": "{\"text\":\"DEMO\",\"mode\":\"demo\",\"color\":\"rgb(233, 207, 156)\"}"
+    },
+    {
+      "name": "Help open moves focus into the dialog (deferred focus)",
+      "ok": true,
+      "detail": "{\"open\":true,\"visible\":\"visible\",\"activeId\":\"help-close\",\"activeInDialog\":true,\"expanded\":\"true\",\"attempts\":1}"
+    },
+    {
+      "name": "Help traps Tab and Shift+Tab inside the modal",
+      "ok": true,
+      "detail": "{\"tab\":{\"inDialog\":true,\"id\":\"help-close\"},\"shiftTab\":{\"inDialog\":true,\"id\":\"help-close\"}}"
+    },
+    {
+      "name": "H closes the open modal and restores focus",
+      "ok": true,
+      "detail": "{\"open\":false,\"expanded\":\"false\",\"activeId\":\"help-button\"}"
+    },
+    {
+      "name": "Backdrop click closes the help dialog",
+      "ok": true,
+      "detail": "DIV.help__backdrop"
+    },
+    {
+      "name": "Modal blocks background shortcuts (U ignored while open)",
+      "ok": true,
+      "detail": "{\"uiHidden\":false,\"helpOpen\":true}"
+    },
+    {
+      "name": "hideChrome() closes an open modal (defensive path)",
+      "ok": true,
+      "detail": "{\"uiHidden\":true,\"helpOpen\":false,\"helpHidden\":\"true\",\"showUi\":\"visible\"}"
+    },
+    {
+      "name": "Escape restores chrome after hide",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Help focus/restore falls back to #help-button when focus was BODY",
+      "ok": true,
+      "detail": "{\"focus\":{\"activeInDialog\":true,\"id\":\"help-close\"},\"restore\":\"help-button\"}"
+    },
+    {
+      "name": "Demo bloom loop still runs after patch",
+      "ok": true,
+      "detail": "{\"bloom\":0.99,\"gesture\":\"open\"}"
+    },
+    {
+      "name": "Camera live after patch",
+      "ok": true,
+      "detail": "{\"live\":true,\"mode\":\"camera\",\"trackerRunning\":true,\"badgeText\":\"LIVE\",\"badgeDataMode\":\"live\",\"badgeColor\":\"rgb(143, 217, 196)\",\"toggleLabel\":\"收起摄像头预览\",\"toggleExpanded\":\"true\"}"
+    },
+    {
+      "name": "LIVE badge uses data-mode=live + mint styling",
+      "ok": true,
+      "detail": "{\"text\":\"LIVE\",\"mode\":\"live\",\"color\":\"rgb(143, 217, 196)\"}"
+    },
+    {
+      "name": "Tracker toggle aria-label/expanded update on collapse/expand",
+      "ok": true,
+      "detail": "{\"collapsed\":{\"collapsed\":true,\"label\":\"展开摄像头预览\",\"expanded\":\"false\"},\"expanded\":{\"label\":\"收起摄像头预览\",\"expanded\":\"true\"}}"
+    },
+    {
+      "name": "pagehide stops camera tracks",
+      "ok": true,
+      "detail": "{\"live\":true,\"mode\":\"camera\",\"trackerRunning\":false,\"videoSrcObject\":null}"
+    },
+    {
+      "name": "pageshow recovers bfcache restore to intro error state",
+      "ok": true,
+      "detail": "{\"mode\":\"intro\",\"live\":false,\"trackerRunning\":false,\"introVisible\":\"visible\",\"introState\":\"error\",\"introStatus\":\"摄像头在页面切换后已停止，请重新开启。\",\"introNote\":\"摄像头在页面切换时被浏览器暂停。重新开启摄像头，或直接进入演示模式。\",\"statusPill\":\"error\",\"cameraDisabled\":false,\"demoDisabled\":false,\"badgeDataMode\":\"demo\"}"
+    },
+    {
+      "name": "bfcache recovery offers enabled retry + demo CTAs",
+      "ok": true,
+      "detail": "{\"status\":\"摄像头在页面切换后已停止，请重新开启。\",\"note\":\"摄像头在页面切换时被浏览器暂停。重新开启摄像头，或直接进入演示模式。\",\"cameraDisabled\":false,\"demoDisabled\":false}"
+    },
+    {
+      "name": "Camera retry succeeds after bfcache recovery",
+      "ok": true,
+      "detail": "{\"live\":true,\"mode\":\"camera\",\"trackerRunning\":true,\"badgeDataMode\":\"live\"}"
+    },
+    {
+      "name": "No \"Blocked aria-hidden ... retained focus\" warning",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No unexpected console errors / page exceptions",
+      "ok": true,
+      "detail": "{\"errors\":[],\"exceptions\":[]}"
+    }
+  ],
+  "consoleErrors": [],
+  "consoleWarnings": [
+    "W1102 07:32:25.703000 1922656 gl_context.cc:1072] OpenGL error checking is disabled",
+    "W1102 07:32:30.650000 1922656 landmark_projection_calculator.cc:189] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.",
+    "[.WebGL-0x416c05f6cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[.WebGL-0x416c05f6cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[.WebGL-0x416c05f6cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "[.WebGL-0x416c05f6cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+    "W1102 07:32:37.866000 1922656 gl_context.cc:1072] OpenGL error checking is disabled",
+    "W1102 07:32:41.681000 1922656 landmark_projection_calculator.cc:189] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX."
+  ],
+  "pageExceptions": [],
+  "ariaHiddenWarnings": [],
+  "screenshots": [
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-postfix-bfcache.png"
+  ],
+  "notes": [
+    "Console warnings observed (8): [\"W1102 07:32:25.703000 1922656 gl_context.cc:1072] OpenGL error checking is disabled\",\"W1102 07:32:30.650000 1922656 landmark_projection_calculator.cc:189] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.\",\"[.WebGL-0x416c05f6cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels\",\"[.WebGL-0x416c05f6cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels\",\"[.WebGL-0x416c05f6cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels\",\"[.WebGL-0x416c05f6cc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)\"]"
+  ],
+  "finishedAt": "2026-11-02T07:32:42.500Z"
+}

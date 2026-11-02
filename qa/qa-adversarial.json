@@ -1,0 +1,374 @@
+{
+  "startedAt": "2026-11-02T07:16:48.410Z",
+  "baseUrl": "http://127.0.0.1:51791",
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "checks": [
+    {
+      "name": "WebGL scene boots",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Intro boot state correct",
+      "ok": true,
+      "detail": "{\"mode\":\"intro\",\"live\":false,\"error\":null}"
+    },
+    {
+      "name": "No horizontal overflow at 1440x900",
+      "ok": true,
+      "detail": "scrollWidth=1440"
+    },
+    {
+      "name": "Scene canvas fills viewport",
+      "ok": true,
+      "detail": "{\"w\":1440,\"h\":900}"
+    },
+    {
+      "name": "Canvas backing = viewport x DPR",
+      "ok": true,
+      "detail": "{\"backing\":{\"w\":1440,\"h\":900},\"dpr\":1}"
+    },
+    {
+      "name": "Intro title stays in left editorial column",
+      "ok": true,
+      "detail": "{\"x\":108,\"y\":255.46875,\"w\":447.265625,\"h\":181.796875,\"bottom\":437.265625,\"right\":555.265625}"
+    },
+    {
+      "name": "CTAs visible and in viewport",
+      "ok": true,
+      "detail": "{\"camera\":{\"x\":108,\"y\":549.328125,\"w\":236.515625,\"h\":54,\"bottom\":603.328125,\"right\":344.515625},\"demo\":{\"x\":356.515625,\"y\":549.328125,\"w\":221.40625,\"h\":54,\"bottom\":603.328125,\"right\":577.921875}}"
+    },
+    {
+      "name": "All buttons have accessible names",
+      "ok": true,
+      "detail": "missing=0"
+    },
+    {
+      "name": "intro-status uses aria-live=polite",
+      "ok": true,
+      "detail": "polite"
+    },
+    {
+      "name": "Privacy copy present in intro",
+      "ok": true,
+      "detail": "摄像头画面仅在本机处理，不会上传、不会保存。随时可以关闭。"
+    },
+    {
+      "name": "Help dialog carries modal semantics",
+      "ok": true,
+      "detail": "{\"role\":\"dialog\",\"modal\":\"true\",\"labelledby\":\"help-title\"}"
+    },
+    {
+      "name": "Help dialog closed (aria-hidden) at boot",
+      "ok": true,
+      "detail": "{\"hidden\":\"true\",\"expanded\":\"false\"}"
+    },
+    {
+      "name": "show-ui hidden unless ui-hidden",
+      "ok": true,
+      "detail": "hidden"
+    },
+    {
+      "name": "HUD aria-hidden false in DOM before live? (visible only via CSS)",
+      "ok": true,
+      "detail": "null"
+    },
+    {
+      "name": "Real click opens help dialog and moves focus inside",
+      "ok": false,
+      "detail": "{\"open\":true,\"hidden\":\"false\",\"expanded\":\"true\",\"active\":\"help-button\",\"activeInDialog\":false,\"bodyOverflow\":\"hidden\",\"panelVisibility\":\"hidden\",\"dialogRect\":{\"x\":413.7200012207031,\"y\":170.579345703125,\"w\":612.56005859375,\"h\":586.82568359375,\"bottom\":757.405029296875,\"right\":1026.2800598144531}}"
+    },
+    {
+      "name": "Help dialog fits 1440x900",
+      "ok": true,
+      "detail": "{\"x\":413.7200012207031,\"y\":170.579345703125,\"w\":612.56005859375,\"h\":586.82568359375,\"bottom\":757.405029296875,\"right\":1026.2800598144531}"
+    },
+    {
+      "name": "Escape closes help and restores focus to help button",
+      "ok": true,
+      "detail": "{\"open\":false,\"expanded\":\"false\",\"active\":\"help-button\"}"
+    },
+    {
+      "name": "H toggles help open and closed",
+      "ok": true,
+      "detail": "open=true, closed=true"
+    },
+    {
+      "name": "\"?\" opens help",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Clicking help backdrop closes dialog",
+      "ok": false,
+      "detail": "{\"tag\":\"SECTION\",\"cls\":\"\"}"
+    },
+    {
+      "name": "U hides chrome, Escape restores it",
+      "ok": true,
+      "detail": "{\"hidden\":{\"hidden\":true,\"showUi\":\"visible\",\"header\":\"hidden\"},\"restored\":{\"hidden\":false,\"showUi\":\"visible\",\"header\":\"visible\"}}"
+    },
+    {
+      "name": "Clicking show-ui restores chrome",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "D key starts demo from intro",
+      "ok": true,
+      "detail": "{\"mode\":\"demo\",\"live\":true,\"badge\":\"DEMO\",\"trackerDisplay\":\"none\",\"hudVisible\":\"visible\",\"introHidden\":\"true\",\"introInert\":true,\"status\":\"自动演示\"}"
+    },
+    {
+      "name": "Demo hides intro, shows HUD, no camera card",
+      "ok": true,
+      "detail": "{\"mode\":\"demo\",\"live\":true,\"badge\":\"DEMO\",\"trackerDisplay\":\"none\",\"hudVisible\":\"visible\",\"introHidden\":\"true\",\"introInert\":true,\"status\":\"自动演示\"}"
+    },
+    {
+      "name": "Demo badge + status label",
+      "ok": true,
+      "detail": "{\"badge\":\"DEMO\",\"status\":\"自动演示\"}"
+    },
+    {
+      "name": "Demo loop blooms the flower past 90%",
+      "ok": true,
+      "detail": "{\"bloom\":0.94,\"gesture\":\"open\",\"bloomValue\":\"94%\"}"
+    },
+    {
+      "name": "HUD bloom meter tracks flower.bloom (±2%)",
+      "ok": true,
+      "detail": "{\"bloom\":0.95,\"bloomValue\":\"95%\",\"bloomFill\":\"95%\",\"gestureName\":\"绽放\",\"gestureData\":\"open\"}"
+    },
+    {
+      "name": "Gesture card shows open-palm coaching copy",
+      "ok": true,
+      "detail": "{\"name\":\"绽放\",\"data\":\"open\"}"
+    },
+    {
+      "name": "T is a no-op in demo mode",
+      "ok": true,
+      "detail": "{\"collapsed\":false,\"display\":\"none\"}"
+    },
+    {
+      "name": "?quality=low selects 6k-particle tier",
+      "ok": true,
+      "detail": "{\"quality\":\"low\",\"particleCount\":6000,\"bloom\":0.16922570434314638,\"sceneWidth\":1440,\"dpr\":1}"
+    },
+    {
+      "name": "Invalid ?quality falls back to auto tier",
+      "ok": true,
+      "detail": "{\"quality\":\"high\",\"error\":null}"
+    },
+    {
+      "name": "prefers-reduced-motion disables CSS motion (WebGL loop continues)",
+      "ok": true,
+      "detail": "{\"matches\":true,\"auroraAnimation\":\"none\",\"introItemDuration\":\"1e-06s\",\"hudPulse\":\"1e-06s\",\"live\":true}"
+    },
+    {
+      "name": "HAND_CONNECTIONS is a valid 21-landmark skeleton",
+      "ok": true,
+      "detail": "{\"connectionCount\":21,\"connectionsValid\":true,\"handTrackerCtorThrows\":true,\"quality\":\"high\",\"particles\":22000,\"bloomAfterIdle\":0.3712295652077872,\"backingAfterResize\":{\"w\":800,\"h\":600,\"expected\":{\"w\":800,\"h\":600}},\"threwAfterDispose\":false,\"disposedSafe\":true}"
+    },
+    {
+      "name": "HandTracker constructor validates required elements",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "name": "FlowerField resize/dispose safe + idempotent",
+      "ok": true,
+      "detail": "{\"connectionCount\":21,\"connectionsValid\":true,\"handTrackerCtorThrows\":true,\"quality\":\"high\",\"particles\":22000,\"bloomAfterIdle\":0.3712295652077872,\"backingAfterResize\":{\"w\":800,\"h\":600,\"expected\":{\"w\":800,\"h\":600}},\"threwAfterDispose\":false,\"disposedSafe\":true}"
+    },
+    {
+      "name": "390x844 demo: no horizontal scroll",
+      "ok": true,
+      "detail": "{\"scrollWidth\":390,\"inner\":{\"w\":390,\"h\":844}}"
+    },
+    {
+      "name": "390x844 demo: gesture card fully inside viewport",
+      "ok": true,
+      "detail": "{\"x\":12,\"y\":683.3,\"w\":366,\"h\":148.7,\"right\":378,\"bottom\":832}"
+    },
+    {
+      "name": "390x844 demo: hide-ui does not cover gesture card",
+      "ok": true,
+      "detail": "{\"gesture\":{\"x\":12,\"y\":683.3,\"w\":366,\"h\":148.7,\"right\":378,\"bottom\":832},\"hideUi\":{\"x\":348,\"y\":379.7,\"w\":34,\"h\":34,\"right\":382,\"bottom\":413.7}}"
+    },
+    {
+      "name": "360x640 intro: no horizontal scroll",
+      "ok": true,
+      "detail": "{\"scrollWidth\":360,\"inner\":{\"w\":360,\"h\":640}}"
+    },
+    {
+      "name": "360x640 intro: CTAs inside viewport and hit-testable",
+      "ok": true,
+      "detail": "{\"camera\":{\"x\":20,\"y\":356.5,\"w\":320,\"h\":48,\"right\":340,\"bottom\":404.5},\"demo\":{\"x\":20,\"y\":414.5,\"w\":320,\"h\":48,\"right\":340,\"bottom\":462.5}}"
+    },
+    {
+      "name": "360x640 demo: no horizontal scroll and HUD fits",
+      "ok": true,
+      "detail": "{\"scrollWidth\":360,\"gesture\":{\"x\":12,\"y\":479.3,\"right\":348,\"bottom\":628},\"hideUi\":{\"x\":318,\"y\":283.8,\"right\":352,\"bottom\":317.8},\"inner\":{\"w\":360,\"h\":640}}"
+    },
+    {
+      "name": "Camera live state: HUD + LIVE badge + intro hidden",
+      "ok": true,
+      "detail": "{\"live\":true,\"mode\":\"camera\",\"trackerRunning\":true,\"introHidden\":\"true\",\"introInert\":true,\"badge\":\"LIVE\",\"statusState\":\"live\",\"statusText\":\"寻找手部\",\"trackerState\":\"等待手部进入画面\",\"trackerDisplay\":\"flex\",\"videoReady\":4,\"videoWidth\":1280,\"videoHeight\":720,\"videoObjectFit\":\"cover\",\"videoTransform\":\"matrix(-1, 0, 0, 1, 0, 0)\",\"overlayWidth\":248,\"overlayHeight\":186,\"overlayClient\":{\"w\":248,\"h\":186},\"overlayTr"
+    },
+    {
+      "name": "Fake camera stream delivers video frames",
+      "ok": true,
+      "detail": "{\"readyState\":4,\"w\":1280,\"h\":720}"
+    },
+    {
+      "name": "Video mirrored, overlay not mirrored",
+      "ok": true,
+      "detail": "{\"video\":\"matrix(-1, 0, 0, 1, 0, 0)\",\"overlay\":\"none\",\"fit\":\"cover\"}"
+    },
+    {
+      "name": "Landmark overlay canvas sized to CSS box x DPR",
+      "ok": true,
+      "detail": "{\"backing\":{\"w\":248,\"h\":186},\"client\":{\"w\":248,\"h\":186},\"dpr\":1}"
+    },
+    {
+      "name": "No-hand camera HUD copy is correct",
+      "ok": true,
+      "detail": "{\"trackerState\":\"等待手部进入画面\",\"gesture\":\"静候\",\"status\":\"寻找手部\"}"
+    },
+    {
+      "name": "T collapses tracker preview (aria-expanded=false, body hidden)",
+      "ok": true,
+      "detail": "{\"collapsed\":true,\"expanded\":\"false\",\"bodyDisplay\":\"none\",\"width\":\"122.203px\"}"
+    },
+    {
+      "name": "T expands tracker preview again",
+      "ok": true,
+      "detail": "{\"collapsed\":false,\"expanded\":\"true\",\"bodyDisplay\":\"flex\"}"
+    },
+    {
+      "name": "Live resize to mobile resizes WebGL canvas (CSS 390x844 x tier DPR)",
+      "ok": true,
+      "detail": "{\"backing\":{\"w\":780,\"h\":1688},\"expected\":{\"w\":780,\"h\":1688},\"css\":{\"w\":390,\"h\":844},\"quality\":\"high\"}"
+    },
+    {
+      "name": "Live 390x844 camera: no h-scroll, no HUD overlap",
+      "ok": true,
+      "detail": "{\"tracker\":{\"x\":12,\"y\":527.7,\"w\":122,\"h\":147.6,\"right\":134,\"bottom\":675.3},\"gesture\":{\"x\":12,\"y\":683.3,\"w\":366,\"h\":148.7,\"right\":378,\"bottom\":832},\"hideUi\":{\"x\":348,\"y\":379.7,\"w\":34,\"h\":34,\"right\":382,\"bottom\":413.7},\"scrollWidth\":390}"
+    },
+    {
+      "name": "Tracking keeps running across resize",
+      "ok": true,
+      "detail": "{\"videoWidth\":1280,\"trackerState\":\"等待手部进入画面\"}"
+    },
+    {
+      "name": "pagehide stops camera tracks",
+      "ok": true,
+      "detail": "{\"live\":true,\"mode\":\"camera\",\"trackerRunning\":false,\"videoSrcObject\":null,\"hudVisible\":\"visible\",\"statusText\":\"寻找手部\",\"introHidden\":\"true\"}"
+    },
+    {
+      "name": "Camera denial shows error state and stays on intro",
+      "ok": false,
+      "detail": "{\"state\":\"ready\",\"status\":\"花已醒来，正在进入花园…\",\"note\":\"画面只在本机浏览器中处理，不会离开设备。\",\"cameraDisabled\":false,\"demoDisabled\":false,\"bodyLive\":true,\"trackerRunning\":true,\"statusPill\":\"live\",\"toast\":\"连接成功 · 握拳收拢花苞，张开手掌让它绽放\",\"introVisible\":\"hidden\"}"
+    },
+    {
+      "name": "Camera denial error is useful Chinese permission copy",
+      "ok": false,
+      "detail": "花已醒来，正在进入花园…"
+    },
+    {
+      "name": "Denial keeps both CTAs enabled and offers demo fallback",
+      "ok": false,
+      "detail": "{\"cameraDisabled\":false,\"demoDisabled\":false,\"note\":\"画面只在本机浏览器中处理，不会离开设备。\"}"
+    },
+    {
+      "name": "Demo fallback works after camera denial",
+      "ok": true,
+      "detail": "{\"mode\":\"demo\",\"live\":true,\"badge\":\"DEMO\"}"
+    },
+    {
+      "name": "No external runtime requests",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No failed local requests",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No HTTP >= 400 responses",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No unexpected console errors / page exceptions",
+      "ok": true,
+      "detail": "{\"errors\":[],\"exceptions\":[]}"
+    },
+    {
+      "name": "WASM served as application/wasm with nosniff",
+      "ok": true,
+      "detail": "{\"status\":200,\"type\":\"application/wasm\",\"nosniff\":\"nosniff\"}"
+    }
+  ],
+  "consoleErrors": [],
+  "consoleWarnings": [
+    {
+      "phase": "demo",
+      "text": "Blocked aria-hidden on an element because its descendant retained focus. The focus must not be hidden from assistive technology users. Avoid using aria-hidden on a focused element or its ancestor. Consider using the inert attribute instead, which will also prevent focus. For more details, see the aria-hidden section of the WAI-ARIA specification at https://w3c.github.io/aria/#aria-hidden.\nElement with focus: <button.btn btn--primary#enter-camera>\nAncestor with aria-hidden: <section.is-hidden#intro>"
+    },
+    {
+      "phase": "camera-live",
+      "text": "W1102 07:18:02.611000 1922656 gl_context.cc:1072] OpenGL error checking is disabled"
+    },
+    {
+      "phase": "camera-live",
+      "text": "W1102 07:18:06.633000 1922656 landmark_projection_calculator.cc:189] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX."
+    },
+    {
+      "phase": "camera-live",
+      "text": "[.WebGL-0x793403be2200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "phase": "camera-live",
+      "text": "[.WebGL-0x793403be2200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "phase": "camera-live",
+      "text": "[.WebGL-0x793403be2200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "phase": "camera-live",
+      "text": "[.WebGL-0x793403be2200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "phase": "camera-denied",
+      "text": "W1102 07:18:20.240000 1922656 gl_context.cc:1072] OpenGL error checking is disabled"
+    },
+    {
+      "phase": "camera-denied",
+      "text": "W1102 07:18:30.643000 1922656 landmark_projection_calculator.cc:189] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX."
+    }
+  ],
+  "pageExceptions": [],
+  "externalRequests": [],
+  "failedRequests": [],
+  "httpErrors": [],
+  "screenshots": [
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-low-quality.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-mobile-390-demo.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-mobile-360-intro.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-mobile-360-demo.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-camera-mobile.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-bfcache-stale-live.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-camera-denied.png"
+  ],
+  "notes": [
+    "Backdrop close failed; elementFromPoint(40,450) = {\"tag\":\"SECTION\",\"cls\":\"\"}",
+    "MINOR: no focus trap — Tab from #help-close escapes to enter-camera (aria-modal=true but focus can leave dialog).",
+    "During camera start (60ms): {\"introState\":\"loading\",\"cameraDisabled\":true,\"cameraBusy\":\"true\",\"progress\":\"10%\",\"spinner\":\"block\"}",
+    "MINOR: simulated bfcache restore leaves mode=camera, live=true, trackerRunning=false — HUD still claims LIVE but no tracking and no in-page recovery path (source: src/main.js:575-577 stops tracker on pagehide; no pageshow handler).",
+    "Console warnings during whole run (9): [{\"phase\":\"demo\",\"text\":\"Blocked aria-hidden on an element because its descendant retained focus. The focus must not be hidden from assistive technology users. Avoid using aria-hidden on a focused element or its ancestor. Consider using the inert attribute instead, which will also prevent focus. For more details, see the aria-hidden section of the WAI-ARIA specification at https://w3c.github.io/aria/#aria-hidden.\\nElement with focus: <button.btn btn--primary#enter-camera>\\nAncestor with aria-hidden: <section.is-hidden#intro>\"},{\"phase\":\"camera-live\",\"text\":\"W1102 07:18:02.611000 1922656 gl_context.cc:1072] OpenGL error checking is disabled\"},{\"phase\":\"camera-live\",\"text\":\"W1102 07:18:06.633000 1922656 landmark_projection_calculator.cc:189] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.\"},{\"phase\":\"camera-live\",\"text\":\"[.WebGL-0x793403be2200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels\"},{\"phase\":\"camera-live\",\"text\":\"[.WebGL-0x793403be2200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels\"},{\"phase\":\"camera-live\",\"text\":\"[.WebGL-0x793403be2200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels\"}]",
+    "Forced-denial console diagnostics (expected): []"
+  ],
+  "phase": "audit",
+  "finishedAt": "2026-11-02T07:18:54.215Z"
+}

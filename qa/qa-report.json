@@ -1,0 +1,122 @@
+{
+  "startedAt": "2026-11-02T08:05:53.983Z",
+  "baseUrl": "http://127.0.0.1:50710",
+  "chrome": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "checks": [
+    {
+      "name": "WebGL scene boots",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Intro is interactive and scene is alive",
+      "ok": true,
+      "detail": "{\"mode\":\"intro\",\"live\":false,\"hasWebgl\":true,\"title\":\"指尖花\\n          bloom at your fingertips\",\"introVisible\":true}"
+    },
+    {
+      "name": "Demo mode starts without camera",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Demo closes into a bud",
+      "ok": true,
+      "detail": "bloom=0.33, gesture=fist"
+    },
+    {
+      "name": "Demo drives flower bloom",
+      "ok": true,
+      "detail": "bloom=1.00, gesture=open"
+    },
+    {
+      "name": "HUD visible / intro hidden in demo",
+      "ok": true,
+      "detail": "{\"mode\":\"demo\",\"live\":true,\"bloom\":0.9999937794275539,\"hand\":\"open\",\"introHidden\":true,\"hudVisible\":true}"
+    },
+    {
+      "name": "Help dialog opens accessibly",
+      "ok": true,
+      "detail": "{\"open\":true,\"hidden\":\"false\",\"expanded\":\"true\",\"activeInDialog\":true,\"activeId\":\"help-close\"}"
+    },
+    {
+      "name": "Help moves focus into the dialog",
+      "ok": true,
+      "detail": "{\"open\":true,\"hidden\":\"false\",\"expanded\":\"true\",\"activeInDialog\":true,\"activeId\":\"help-close\"}"
+    },
+    {
+      "name": "Help keeps Tab focus inside the modal",
+      "ok": true,
+      "detail": "{\"activeInDialog\":true,\"activeId\":\"help-close\"}"
+    },
+    {
+      "name": "Help restores focus on close",
+      "ok": true,
+      "detail": "{\"activeId\":\"help-button\",\"expanded\":\"false\"}"
+    },
+    {
+      "name": "Hide / restore chrome works",
+      "ok": true,
+      "detail": "hidden=true, restored=true"
+    },
+    {
+      "name": "Mobile layout fits viewport",
+      "ok": true,
+      "detail": "{\"width\":390,\"scrollWidth\":390,\"bloom\":0.9982940661510841,\"cameraPanel\":\"none\"}"
+    },
+    {
+      "name": "Camera stream + MediaPipe model initialize",
+      "ok": true,
+      "detail": "{\"live\":true,\"mode\":\"camera\",\"trackerRunning\":true,\"introState\":\"ready\",\"introStatus\":\"花已醒来，正在进入花园…\",\"trackerState\":\"等待手部进入画面\",\"videoReady\":true,\"videoWidth\":1280,\"overlayWidth\":248,\"badgeText\":\"LIVE\",\"badgeDataMode\":\"live\",\"badgeColor\":\"rgb(143, 217, 196)\"}"
+    },
+    {
+      "name": "Video frames and overlay canvas are ready",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "LIVE badge uses live mint styling",
+      "ok": true,
+      "detail": "{\"live\":true,\"mode\":\"camera\",\"trackerRunning\":true,\"introState\":\"ready\",\"introStatus\":\"花已醒来，正在进入花园…\",\"trackerState\":\"等待手部进入画面\",\"videoReady\":true,\"videoWidth\":1280,\"overlayWidth\":248,\"badgeText\":\"LIVE\",\"badgeDataMode\":\"live\",\"badgeColor\":\"rgb(143, 217, 196)\"}"
+    },
+    {
+      "name": "bfcache restore recovers to intro with retry CTA",
+      "ok": true,
+      "detail": "{\"mode\":\"intro\",\"live\":false,\"trackerRunning\":false,\"introState\":\"error\",\"introStatus\":\"摄像头在页面切换后已停止，请重新开启。\",\"cameraDisabled\":false,\"demoDisabled\":false}"
+    },
+    {
+      "name": "No console errors",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No failed local requests",
+      "ok": true,
+      "detail": "0 failing request(s)"
+    }
+  ],
+  "consoleErrors": [],
+  "networkErrors": [],
+  "screenshots": [
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\intro-desktop.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\demo-bud.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\demo-desktop.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\help-desktop.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\demo-mobile.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\camera-fake.png"
+  ],
+  "camera": {
+    "live": true,
+    "mode": "camera",
+    "trackerRunning": true,
+    "introState": "ready",
+    "introStatus": "花已醒来，正在进入花园…",
+    "trackerState": "等待手部进入画面",
+    "videoReady": true,
+    "videoWidth": 1280,
+    "overlayWidth": 248,
+    "badgeText": "LIVE",
+    "badgeDataMode": "live",
+    "badgeColor": "rgb(143, 217, 196)"
+  },
+  "finishedAt": "2026-11-02T08:06:28.000Z"
+}

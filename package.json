@@ -1,0 +1,16 @@
+{
+  "name": "finger-tip-bloom",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "指尖花 — a camera-controlled, MediaPipe + Three.js particle flower that blooms between your fingers.",
+  "scripts": {
+    "start": "node serve.mjs",
+    "dev": "node serve.mjs",
+    "check": "node tests/check.mjs",
+    "qa": "node tests/browser-qa.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

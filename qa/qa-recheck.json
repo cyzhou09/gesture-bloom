@@ -1,0 +1,107 @@
+{
+  "startedAt": "2026-11-02T07:30:33.930Z",
+  "checks": [
+    {
+      "name": "Patched getUserMedia denial: intro reaches error state",
+      "ok": true,
+      "detail": "{\"state\":\"error\",\"introStatus\":\"摄像头权限被拒绝。请在地址栏的摄像头图标中允许访问后重试。\",\"introNote\":\"也可以直接进入演示模式，先看看花开的样子。\",\"cameraDisabled\":false,\"demoDisabled\":false,\"bodyLive\":false,\"trackerRunning\":false,\"trackerPanelDisplay\":\"flex\",\"statusPill\":\"error\",\"statusText\":\"连接失败\",\"toast\":\"摄像头未能启动，仍可使用演示模式\",\"introVisibility\":\"v"
+    },
+    {
+      "name": "Denial copy is useful Chinese permission guidance",
+      "ok": true,
+      "detail": "摄像头权限被拒绝。请在地址栏的摄像头图标中允许访问后重试。"
+    },
+    {
+      "name": "Denial points user to demo fallback",
+      "ok": true,
+      "detail": "也可以直接进入演示模式，先看看花开的样子。"
+    },
+    {
+      "name": "Denial leaves both CTAs enabled, no camera stream, intro visible",
+      "ok": true,
+      "detail": "{\"cameraDisabled\":false,\"demoDisabled\":false,\"bodyLive\":false,\"trackerRunning\":false,\"statusPill\":\"error\"}"
+    },
+    {
+      "name": "Demo fallback works from camera-denial error state",
+      "ok": true,
+      "detail": "{\"mode\":\"demo\",\"live\":true,\"badge\":\"DEMO\"}"
+    },
+    {
+      "name": "Help opens fully visible after transition",
+      "ok": true,
+      "detail": "{\"visibility\":\"visible\",\"opacity\":\"1\"}"
+    },
+    {
+      "name": "Backdrop is hit-testable after transition",
+      "ok": true,
+      "detail": "DIV.help__backdrop"
+    },
+    {
+      "name": "Backdrop click closes help after transition",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Focus moves into help dialog on open",
+      "ok": true,
+      "detail": "{\"active\":\"help-close\",\"activeInDialog\":true,\"helpExpanded\":\"true\"}"
+    },
+    {
+      "name": "Tab stays inside modal dialog (focus trap)",
+      "ok": true,
+      "detail": "{\"active\":\"help-close\",\"inDialog\":true}"
+    },
+    {
+      "name": "LIVE mode badge applies LIVE styling",
+      "ok": true,
+      "detail": "{\"text\":\"LIVE\",\"dataMode\":\"live\",\"bodyMode\":\"camera\",\"color\":\"rgb(143, 217, 196)\",\"borderColor\":\"rgba(143, 217, 196, 0.34)\",\"live\":true,\"trackerRunning\":true}"
+    },
+    {
+      "name": "WebGL-unavailable shows graceful Chinese error",
+      "ok": true,
+      "detail": "{\"error\":\"Error creating WebGL context.\",\"introState\":\"error\",\"introStatus\":\"当前浏览器无法创建 WebGL 场景。请开启硬件加速，或使用最新版 Chrome / Edge。\",\"statusPill\":\"error\",\"cameraDisabled\":true,\"demoDisabled\":true,\"bodyLive\":false,\"introVisibility\":\"visible\"}"
+    },
+    {
+      "name": "WebGL failure disables unusable actions and stays on intro",
+      "ok": true,
+      "detail": "{\"error\":\"Error creating WebGL context.\",\"introState\":\"error\",\"introStatus\":\"当前浏览器无法创建 WebGL 场景。请开启硬件加速，或使用最新版 Chrome / Edge。\",\"statusPill\":\"error\",\"cameraDisabled\":true,\"demoDisabled\":true,\"bodyLive\":false,\"introVisibility\":\"visible\"}"
+    }
+  ],
+  "warnings": [
+    {
+      "type": "error",
+      "text": "[bloom] camera start failed: NotAllowedError: 摄像头权限被拒绝。请在浏览器地址栏允许摄像头访问后重试。\n    at makeError (http://127.0.0.1:52375/src/handTracking.js:144:17)\n    at mapCameraError (http://127.0.0.1:52375/src/handTracking.js:206:10)\n    at HandTracker._doStart (http://127.0.0.1:52375/src/handTracking.js:404:15)\n    at async HTMLButtonElement.startCamera (http://127.0.0.1:52375/src/main.js:216:5)"
+    },
+    {
+      "type": "warning",
+      "text": "W1102 07:30:45.791000 1922656 gl_context.cc:1072] OpenGL error checking is disabled"
+    },
+    {
+      "type": "warning",
+      "text": "W1102 07:30:50.576000 1922656 landmark_projection_calculator.cc:189] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x372c0240dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x372c0240dc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "error",
+      "text": "THREE.WebGLRenderer: Error creating WebGL context."
+    },
+    {
+      "type": "error",
+      "text": "[bloom] WebGL init failed: Error: Error creating WebGL context.\n    at new WebGLRenderer (http://127.0.0.1:52375/vendor/three.module.js:15217:13)\n    at new FlowerField (http://127.0.0.1:52375/src/flower.js:727:22)\n    at boot (http://127.0.0.1:52375/src/main.js:606:14)\n    at http://127.0.0.1:52375/src/main.js:666:3"
+    }
+  ],
+  "notes": [],
+  "screenshots": [
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-camera-denied.png",
+    "G:\\Software\\Temp\\DeepSeekHarness\\Test\\gesture-bloom\\qa\\qa-adv-webgl-unavailable.png"
+  ],
+  "ariaHiddenWarnings": [],
+  "finishedAt": "2026-11-02T07:30:52.477Z"
+}
