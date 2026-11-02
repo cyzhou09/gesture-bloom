@@ -42,4 +42,17 @@ synthetic 21-landmark hands. Headless Chrome used SwiftShader, so real-GPU frame
 and real-device mobile behavior still need a human webcam pass. All of these are environment limits,
 not known defects.
 
+## GitHub Pages deployment
+
+- Repository: <https://github.com/cyzhou09/gesture-bloom>
+- Live site: <https://cyzhou09.github.io/gesture-bloom/>
+- GitHub Actions workflow run: **success** (`Deploy to GitHub Pages`, build + deploy).
+- GitHub Pages serves the required MIME types correctly: `.mjs` → `text/javascript`,
+  `.js` → `application/javascript`, `.wasm` → `application/wasm`, `.task` → `application/octet-stream`.
+- `BASE_URL=https://cyzhou09.github.io/gesture-bloom npm run qa` → **18/18 checks passed**
+  on the live HTTPS site (WebGL boot, demo bud/bloom, help/a11y, mobile, MediaPipe camera
+  initialization with synthetic camera, 0 console errors, 0 failed requests).
+- The app is hosted under a GitHub Pages sub-path; all imports and MediaPipe WASM/model paths
+  resolve via relative URLs / `import.meta.url`. A local sub-path simulation also passed 18/18.
+
 **Final verdict: ready to deliver.**

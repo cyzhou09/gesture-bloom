@@ -1,5 +1,8 @@
 # 指尖花 · Bloom at Your Fingertips
 
+> **在线体验：<https://cyzhou09.github.io/gesture-bloom/>**
+> **GitHub：<https://github.com/cyzhou09/gesture-bloom>**
+
 > 一束由 **22,000** 颗光尘组成的花，随着你手掌的开合，在指尖呼吸、收拢与盛放。
 
 一个无需构建、完全本地运行的实时交互网页：摄像头识别手部 21 个关键点，Three.js 粒子花根据「握拳 / 张开」连续变化，指尖划过时花瓣会被轻轻牵引，并留下短暂的光尘尾迹。
@@ -81,6 +84,9 @@ PORT=8080 node serve.mjs
 ---
 
 ## 发布到 GitHub Pages（在线网址）
+
+本项目已部署在 **<https://cyzhou09.github.io/gesture-bloom/>**，手机或电脑直接点开即可（HTTPS，
+允许摄像头后即可手势控制）。下面的步骤用于你自己的 fork 或重新部署。
 
 项目已经按 GitHub Pages 的 **子路径托管** 做好适配（所有资源走相对路径），并附带
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) 自动部署工作流。
